@@ -1,0 +1,1 @@
+This is a portfolio project using the Star Wars API (https://swapi.dev/) and showcasing some features using NextJS.
