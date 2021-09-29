@@ -1,18 +1,31 @@
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Search from "./search";
+import Image from "next/image";
 
+const filterPosts = (data, query) => {
+  if (!query) {
+    return data;
+  }
+
+  return data.filter((data) => {
+    const postName = data.title.toLowerCase();
+    return postName.includes(query);
+  });
+};
 export default function Home() {
+  const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredPosts = filterPosts(data, searchQuery);
+
   useEffect(() => {
     fetch("https://swapi.dev/api/films/", { mode: "cors" })
       .then((res) => res.json())
       .then((result) => {
-        for (const el in result.results) {
-          let filmTitle = document.createElement("h2");
-          filmTitle.innerHTML = result.results[el].title;
-          document.querySelector(".filmContainer").appendChild(filmTitle);
-        }
+        setData(result.results);
       });
-  });
+  }, []);
+
   return (
     <div className="container">
       <Head>
@@ -26,8 +39,20 @@ export default function Home() {
         <p className="description">
           Get started by editing <code>pages/index.js</code>
         </p>
-
-        <div className="filmContainer"></div>
+        <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <div className="filmContainer">
+          
+          <ul className="filmList">
+            {filteredPosts.map((data) => (
+              <li key={data.episode_id}><Image
+              src={require(`../assets/${data.episode_id}.jpg`)}
+              alt={`Poster of episode ${data.episode_id}`}
+              width={252}
+              height={385}
+            /></li>
+            ))}
+          </ul>
+        </div>
       </main>
 
       <footer>
@@ -41,6 +66,12 @@ export default function Home() {
       </footer>
 
       <style jsx>{`
+
+        .filmList {
+          list-style-type: none;
+          display: flex;
+        }
+
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
