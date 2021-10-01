@@ -32,7 +32,11 @@ export default function four() {
         <Link href="/">Back to Home</Link>{" "}
 
       <main>
-        <h1 className="title">{objectData.title}</h1>
+        <div className="title-navigation">
+          <h1 className="title">{objectData.title}</h1>
+          <Link href="/5">The Empire Strikes Back →</Link>
+          </div>
+        
         <p>Description: {objectData.opening_crawl}</p>
         <p>Director: {objectData.director}</p>
         <p>Producer: {objectData.producer}</p>
@@ -43,10 +47,13 @@ export default function four() {
             ? charData.data.map((el) => (
                 <div className="character">
                   <Image
+                    className="character-image"
                     src={require(`../assets/characters/${el.name}.png`)}
                     alt={`Picture of ${el.name}`}
-                    width={125}
+                    width={112}
                     height={150}
+                    layout={"fill"}
+                    objectFit={"cover"}
                   />
                   <div className="tooltiptext">
                     <span>Name: {el.name}</span>
@@ -62,18 +69,26 @@ export default function four() {
       </main>
       <style jsx>{`
 
-        .characters-container {
-          display: flex;
-          flex-direction: row;
-          height: 600px;
-          flex-wrap: wrap;
-        }
+      .title-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .character {
-          position: relative;
-          padding: 20px;
-          padding-bottom: 70px;
-        }
+.characters-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.character {
+  position: relative;
+  width: 112px;
+  height: 150px;
+  padding: 20px;
+}
 
         .character .tooltiptext {
           visibility: hidden;

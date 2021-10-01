@@ -22,7 +22,6 @@ export default function four() {
     await setCharData({ ...charData, isLoaded: true, data: characterData });
   };
 
-
   useEffect(() => {
     myAsyncLoopFunction(objectData.characters);
   }, []);
@@ -31,8 +30,11 @@ export default function four() {
     <div>
       <Link href="/">Back to Home</Link>
       <main>
-        
-        <h1 className="title">{objectData.title}</h1>
+      <div className="title-navigation">
+          <Link href="/6">← Return of the Jedi</Link>
+          <h1 className="title">{objectData.title}</h1>
+          <Link href="/2">Attack of the Clones →</Link>
+        </div>
         <p>Description: {objectData.opening_crawl}</p>
         <p>Director: {objectData.director}</p>
         <p>Producer: {objectData.producer}</p>
@@ -43,13 +45,16 @@ export default function four() {
             ? charData.data.map((el) => (
                 <div className="character">
                   <Image
+                    className="character-image"
                     src={require(`../assets/characters/${el.name}.png`)}
                     alt={`Picture of ${el.name}`}
-                    width={125}
+                    width={112}
                     height={150}
+                    layout={"fill"}
+                    objectFit={"cover"}
                   />
                   <div className="tooltiptext">
-                    <span>Name: {el.name}</span>
+                    <span>{el.name}</span>
                     <span>Birth Year: {el.birth_year}</span>
                     <span>Eye Colour: {el.eye_color}</span>
                     <span>Gender: {el.gender}</span>
@@ -62,17 +67,25 @@ export default function four() {
       </main>
       <style jsx>{`
 
+.title-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
         .characters-container {
           display: flex;
           flex-direction: row;
-          height: 600px;
           flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
         }
 
         .character {
           position: relative;
+          width: 112px;
+          height: 150px;
           padding: 20px;
-          padding-bottom: 70px;
         }
 
         .character .tooltiptext {
@@ -106,8 +119,8 @@ export default function four() {
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
-            width: 80%;
-            margin: 0 auto;
+          width: 80%;
+          margin: 0 auto;
         }
       `}</style>
     </div>
