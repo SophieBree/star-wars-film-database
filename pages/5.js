@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function four() {
   const [charData, setCharData] = useState({ isLoaded: false, data: [null] });
@@ -27,6 +29,7 @@ export default function four() {
 
   return (
     <div>
+      <Link href="/">Back to Home</Link> 
       <main>
         <h1 className="title">{objectData.title}</h1>
         <p>Description: {objectData.opening_crawl}</p>
@@ -38,8 +41,14 @@ export default function four() {
           {charData.isLoaded
             ? charData.data.map((el) => (
                 <div className="character">
-                  {el.name}
+                  <Image
+                    src={require(`../assets/characters/${el.name}.png`)}
+                    alt={`Picture of ${el.name}`}
+                    width={125}
+                    height={150}
+                  />
                   <div className="tooltiptext">
+                    <span>{el.name}</span>
                     <span>Birth Year: {el.birth_year}</span>
                     <span>Eye Colour: {el.eye_color}</span>
                     <span>Gender: {el.gender}</span>
@@ -78,7 +87,7 @@ export default function four() {
           z-index: 1;
           top: 100%
           left: 50%;
-          margin-left: -60px;
+          margin-left: -40px;
         }
 
         .character:hover .tooltiptext {
