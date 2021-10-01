@@ -2,6 +2,8 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import Search from "./search";
 import Image from "next/image";
+import update from "immutability-helper";
+import Link from "next/link";
 
 const filterPosts = (data, query) => {
   if (!query) {
@@ -9,21 +11,28 @@ const filterPosts = (data, query) => {
   }
 
   return data.filter((data) => {
-    const postName = data.title.toLowerCase();
-    return postName.includes(query);
+    const filmName = data.title.toLowerCase();
+    return filmName.includes(query);
   });
 };
+
 export default function Home() {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const filteredPosts = filterPosts(data, searchQuery);
 
   useEffect(() => {
-    fetch("https://swapi.dev/api/films/", { mode: "cors" })
-      .then((res) => res.json())
-      .then((result) => {
-        setData(result.results);
-      });
+    if ("data" in localStorage) {
+      setData(JSON.parse(localStorage.getItem("data")));
+    } else {
+      fetch("https://swapi.dev/api/films/", { mode: "cors" })
+        .then((res) => res.json())
+        .then((result) => {
+          result.results.map((data) => (data.favourited = false));
+          setData(result.results);
+          localStorage.setItem("data", JSON.stringify(result.results));
+        });
+    }
   }, []);
 
   return (
@@ -36,40 +45,76 @@ export default function Home() {
       <main>
         <h1 className="title">Star Wars Film Database</h1>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <div className="filmContainer">
-          
           <ul className="filmList">
-            {filteredPosts.map((data) => (
-              <li key={data.episode_id}><Image
-              src={require(`../assets/${data.episode_id}.jpg`)}
-              alt={`Poster of episode ${data.episode_id}`}
-              width={252}
-              height={385}
-            /></li>
+            {filteredPosts.map((el, index) => (
+              <li key={el.episode_id}>
+                <span
+                  className="favourite"
+                  onClick={() => {
+                    const objectValue = {
+                      ...el,
+                      favourited: !el.favourited,
+                    };
+
+                    const index = data.findIndex(
+                      (item) => item.episode_id == el.episode_id
+                    );
+                    const updatedData = update(data, {
+                      $splice: [[index, 1, objectValue]],
+                    });
+                    updatedData.sort(
+                      (a, b) =>
+                        new Date(a.release_date) - new Date(b.release_date)
+                    );
+                    updatedData.sort((a, b) => b.favourited - a.favourited);
+
+                    setData(updatedData);
+                    if (typeof window !== "undefined") {
+                      localStorage.setItem("data", JSON.stringify(updatedData));
+                    }
+                  }}
+                >
+                  {data[index].favourited == true ? "★" : "☆"}
+                </span>
+                <Link href={`/${el.episode_id}`}>
+                  <Image
+                    src={require(`../assets/${el.episode_id}.jpg`)}
+                    alt={`Poster of episode ${el.episode_id}`}
+                    width={252}
+                    height={385}
+                  />
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
       </main>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/vercel.svg" alt="Vercel" className="logo" />
-        </a>
-      </footer>
-
       <style jsx>{`
-
         .filmList {
           list-style-type: none;
           display: flex;
+        }
+
+        .filmList li {
+          transition: transform 0.2s;
+          position: relative;
+          text-align: left;
+          color: white;
+        }
+
+        .filmList li:hover {
+          transform: scale(1.2);
+        }
+
+        .filmList span {
+          position: absolute;
+          top: 8px;
+          left: 16px;
+          z-index: 1;
+          font-size: 32px;
         }
 
         .container {
@@ -82,11 +127,11 @@ export default function Home() {
         }
 
         main {
-          padding: 5rem 0;
+          padding: 5rem 0 10rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
         }
 
@@ -129,6 +174,7 @@ export default function Home() {
           margin: 0;
           line-height: 1.15;
           font-size: 4rem;
+          justify-self: start;
         }
 
         .title,
