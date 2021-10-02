@@ -1,101 +1,101 @@
 @import "https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@300&display=swap";
+
+
 .filmList {
-	list-style-type: none;
-	display: flex;
-	li {
-		transition: transform 0.2s;
-		position: relative;
-		text-align: left;
-		color: white;
-		&:hover {
-			transform: scale(1.2);
-			cursor: pointer;
-			.tooltiptext {
-				visibility: visible;
-			}
-		}
-	}
-	span {
-		position: absolute;
-		top: 8px;
-		left: 16px;
-		z-index: 1;
-		font-size: 32px;
-	}
+  list-style-type: none;
+  display: flex;
+  padding-top: 2rem;
+  li {
+    transition: transform 0.2s;
+    position: relative;
+    text-align: left;
+    color: white;
+    &:hover {
+      transform: scale(1.2);
+      cursor: pointer;
+      .tooltiptext {
+        visibility: visible;
+      }
+    }
+  }
+  span {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    z-index: 1;
+    font-size: 32px;
+  }
 }
 
 .tooltiptext {
-	visibility: hidden;
-	width: 100%;
-	background-color: black;
-	color: #fff;
-	text-align: center;
-	padding: 5px 0;
-	border-radius: 6px;
-	position: absolute;
-	z-index: 1;
+  visibility: hidden;
+  width: 100%;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
 
-	top: 100%;
-	left: 100%;
-	margin-left: -10%;
-	margin-top: 100%;
+  top: 100%;
+  left: 100%;
+  margin-left: -10%;
+  margin-top: 100%;
+}
+
+.favourited {
+  color: yellow;
+}
+
+.favourite:hover {
+  color: yellow;
 }
 
 .container {
-	min-height: 100vh;
-	padding: 0 0.5rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .main {
-	padding: 5rem 0 10rem 0;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
+  padding: 5rem 0 0 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 .title {
-	a {
-		color: #0070f3;
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-		&:focus {
-			text-decoration: underline;
-		}
-		&:active {
-			text-decoration: underline;
-		}
-	}
-	margin: 0;
-	line-height: 1.15;
-	font-size: 4rem;
-	justify-self: start;
-	text-align: center;
+  margin: 0;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  line-height: 1.15;
+  font-size: 4rem;
+  justify-self: start;
+  text-align: center;
 }
 .description {
-	text-align: center;
-	line-height: 1.5;
-	font-size: 1.5rem;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 1.5rem;
 }
 .grid {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-	max-width: 800px;
-	margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin-top: 3rem;
 }
 .logo {
-	height: 1em;
+  height: 1em;
 }
 @media (max-width: 600px) {
-	.grid {
-		width: 100%;
-		flex-direction: column;
-	}
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
 }

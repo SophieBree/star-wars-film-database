@@ -96,7 +96,14 @@ export default function four() {
             Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
           width: 80%;
           margin: 10px auto;
-          background-color: #262626;
+          background-color:black;
+            background-image:
+            radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 10px),
+            radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 10px),
+            radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px),
+            radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 10px);
+            background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+            background-position: 0 0, 1rem 2rem, 4rem 8rem, 2rem 3rem;
           color: #fff;
         }
       `}</style>

@@ -1,0 +1,34 @@
+.visuallyHidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+.searchForm {
+	width: 350px;
+	height: 40px;
+	border-radius: 40px;
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+	background: #fff;
+	padding: 0 20px 0 20px;
+	transition: all 0.3s ease;
+}
+.searchForm.focus {
+	box-shadow: 0 3px 40px rgba(0, 0, 0, 0.15);
+}
+.searchInput {
+	font-size: 14px;
+	background: none;
+	color: #5a6674;
+	width: 350px;
+	height: 40px;
+	border: none;
+	appearance: none;
+	outline: none;
+	&::placeholder {
+		color: #0F0D0C;
+	}
+}

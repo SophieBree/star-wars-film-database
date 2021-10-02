@@ -4,7 +4,7 @@ import Search from "./search";
 import Image from "next/image";
 import update from "immutability-helper";
 import Link from "next/link";
-import styles from "../styles/index.module.scss"
+import styles from "../styles/index.module.scss";
 
 const filterPosts = (data, query) => {
   if (!query) {
@@ -44,7 +44,13 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Star Wars Film Database</h1>
+        <Image
+          src={require("../assets/logo.png")}
+          alt={"Star Wars Logo"}
+          width={450}
+          height={200}
+        />
+        <h1 className={styles.title}>Film Database</h1>
 
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <div className={styles.filmContainer}>
@@ -53,7 +59,7 @@ export default function Home() {
               <li key={el.episode_id}>
                 <span className={styles.tooltiptext}>{el.title}</span>
                 <span
-                  className={styles.favourite}
+                  className={`${styles.favourite} ${data[index].favourited == true ? styles.favourited : styles.favourite}`}
                   onClick={() => {
                     const objectValue = {
                       ...el,
@@ -93,7 +99,7 @@ export default function Home() {
             ))}
           </ul>
         </div>
-      </main>      
+      </main>
 
       <style jsx global>{`
         html,
@@ -103,7 +109,29 @@ export default function Home() {
           font-family: Fira Sans Extra Condensed, -apple-system,
             BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
             Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-          background-color: #262626;
+          background-color: black;
+          background-image: radial-gradient(
+              white,
+              rgba(255, 255, 255, 0.2) 2px,
+              transparent 10px
+            ),
+            radial-gradient(
+              white,
+              rgba(255, 255, 255, 0.15) 1px,
+              transparent 10px
+            ),
+            radial-gradient(
+              white,
+              rgba(255, 255, 255, 0.1) 2px,
+              transparent 10px
+            ),
+            radial-gradient(
+              rgba(255, 255, 255, 0.4),
+              rgba(255, 255, 255, 0.1) 2px,
+              transparent 10px
+            );
+          background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+          background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
           color: #fff;
         }
 
