@@ -1,0 +1,63 @@
+@import "https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@300&display=swap";
+.titleNavigation {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 65%;
+	margin: 0 auto;
+}
+.characterHeading {
+	text-align: center;
+}
+.charactersContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
+	width: 80%;
+	margin: 0 auto;
+}
+.character {
+	position: relative;
+	width: 112px;
+	height: 150px;
+	padding: 20px;
+	.tooltiptext {
+		visibility: hidden;
+		width: 200px;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px 0;
+		position: absolute;
+		z-index: 1;
+		top: 30%;
+        left: 25%;
+		margin-left: -60px;
+	}
+	&:hover {
+		.tooltiptext {
+			visibility: visible;
+		}
+	}
+}
+.tooltiptext {
+	span {
+		display: block;
+	}
+}
+.filmInfo {
+	width: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	margin: 0 auto;
+}
+.descriptionText {
+	width: 50%;
+}
+.navLink {
+	color: #6a98af;
+}

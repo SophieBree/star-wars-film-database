@@ -50,6 +50,10 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
   appearance: none;
   outline: none;
     }
+
+    input::placeholder {
+      color: #0F0D0C
+    }
 `}</style>
     </div>
   );

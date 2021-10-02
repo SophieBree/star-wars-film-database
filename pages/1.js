@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "../styles/film.module.scss"
 
 export default function four() {
   const [charData, setCharData] = useState({ isLoaded: false, data: [null] });
@@ -28,24 +29,45 @@ export default function four() {
 
   return (
     <div>
-      <Link href="/">Back to Home</Link>
+      <Link href="/">
+        <a className={styles.navLink}>Home</a>
+      </Link>
       <main>
-      <div className="title-navigation">
-          <Link href="/6">← Return of the Jedi</Link>
-          <h1 className="title">{objectData.title}</h1>
-          <Link href="/2">Attack of the Clones →</Link>
+        <div className={styles.titleNavigation}>
+          <Link href="/6">
+            <a className={styles.navLink}>← Return of the Jedi</a>
+          </Link>
+          <h1 className={styles.title}>{objectData.title}</h1>
+          <Link href="/2">
+            <a className={styles.navLink}>Attack of the Clones →</a>
+          </Link>
         </div>
-        <p>Description: {objectData.opening_crawl}</p>
-        <p>Director: {objectData.director}</p>
-        <p>Producer: {objectData.producer}</p>
-        <p>Release Date: {objectData.release_date}</p>
-        <span>Characters:</span>
-        <div className="characters-container">
+        <div className={styles.filmInfo}>
+          <div>
+            {" "}
+            <Image
+              className={styles.filmPoster}
+              src={require("../assets/1.jpg")}
+              alt={"Poster of episode 1"}
+              width={252}
+              height={385}
+            />
+          </div>
+          <div className={styles.descriptionText}>
+            <p className={styles.description}>{objectData.opening_crawl}
+            </p>
+            <p>Director: {objectData.director}</p>
+            <p>Producer: {objectData.producer}</p>
+            <p>Release Date: {objectData.release_date}</p>
+          </div>
+        </div>
+        <h1 className={styles.characterHeading}>Characters</h1>
+        <div className={styles.charactersContainer}>
           {charData.isLoaded
             ? charData.data.map((el) => (
-                <div className="character">
+                <div className={styles.character}>
                   <Image
-                    className="character-image"
+                    className={styles.characterImage}
                     src={require(`../assets/characters/${el.name}.png`)}
                     alt={`Picture of ${el.name}`}
                     width={112}
@@ -53,7 +75,7 @@ export default function four() {
                     layout={"fill"}
                     objectFit={"cover"}
                   />
-                  <div className="tooltiptext">
+                  <div className={styles.tooltiptext}>
                     <span>{el.name}</span>
                     <span>Birth Year: {el.birth_year}</span>
                     <span>Eye Colour: {el.eye_color}</span>
@@ -65,62 +87,17 @@ export default function four() {
             : "Loading"}
         </div>
       </main>
-      <style jsx>{`
-
-.title-navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-        .characters-container {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-
-        .character {
-          position: relative;
-          width: 112px;
-          height: 150px;
-          padding: 20px;
-        }
-
-        .character .tooltiptext {
-          visibility: hidden;
-          width: 200px;
-          background-color: black;
-          color: #fff;
-          text-align: center;
-          border-radius: 6px;
-          padding: 5px 0;
-          
-          position: absolute;
-          z-index: 1;
-          top: 100%
-          left: 50%;
-          margin-left: -40px;
-        }
-
-        .character:hover .tooltiptext {
-          visibility: visible;
-        }
-
-        .tooltiptext span {
-          display: block;
-        }
-      `}</style>
 
       <style jsx global>{`
         html,
         body {
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
+          font-family: Fira Sans Extra Condensed, -apple-system,
+            BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+            Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
           width: 80%;
-          margin: 0 auto;
+          margin: 10px auto;
+          background-color: #262626;
+          color: #fff;
         }
       `}</style>
     </div>
