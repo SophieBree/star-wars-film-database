@@ -51,6 +51,7 @@ export default function Home() {
           <ul className={styles.filmList}>
             {filteredPosts.map((el, index) => (
               <li key={el.episode_id}>
+                <span className={styles.tooltiptext}>{el.title}</span>
                 <span
                   className={styles.favourite}
                   onClick={() => {

@@ -10,6 +10,9 @@
 		&:hover {
 			transform: scale(1.2);
 			cursor: pointer;
+			.tooltiptext {
+				visibility: visible;
+			}
 		}
 	}
 	span {
@@ -20,6 +23,24 @@
 		font-size: 32px;
 	}
 }
+
+.tooltiptext {
+	visibility: hidden;
+	width: 100%;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 6px;
+	position: absolute;
+	z-index: 1;
+
+	top: 100%;
+	left: 100%;
+	margin-left: -10%;
+	margin-top: 100%;
+}
+
 .container {
 	min-height: 100vh;
 	padding: 0 0.5rem;
